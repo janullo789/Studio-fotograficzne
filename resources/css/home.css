@@ -97,6 +97,12 @@
     border-radius: 10px;
     padding-bottom: 20px;
 }
+
+.room-header{
+    font-size: 48px;
+    font-family: 'Quicksand', sans-serif; /* Ustaw QuickSand jako czcionkę */
+    color: #808276
+}
 .service-item {
     width: 30%;
     text-align: center;
@@ -118,4 +124,42 @@ form button.send-button:hover {
 
 .container-gallery .row > [class*='col-'] {
     padding:10px; /* Adjust the padding to reduce the gaps */
+}
+
+.room-container {
+    position: relative;
+    width: 100%;
+}
+
+.room-image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.room-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #CCC7B9 /* Semi-transparent background */
+}
+
+.room-container:hover .room-overlay {
+    opacity: 0.9;
+}
+
+.room-text {
+    color: BLACK;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
 }
