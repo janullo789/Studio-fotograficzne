@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PricingController;
+use App\Http\Controllers\RoomController;
+use App\Http\Controllers\VoucherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,12 +18,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/', function () {
-    return view('home');
-});
-Route::get('/product', function () {
-    return view('product/index');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/booking', [BookingController::class, 'index'])->name('booking');
+
+Route::get('/pricing', [PricingController::class, 'index'])->name('pricing');
+
+Route::get('/room', [RoomController::class, 'index'])->name('room');
+
+Route::get('/voucher', [VoucherController::class, 'index'])->name('voucher');
+
+
+
