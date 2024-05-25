@@ -3,5 +3,6 @@
 @section('title', 'FotoStudio - Voucher')
 
 @section('content')
-    strona z voucherami
+    @include('voucher.modal-button')
+    @include('voucher.contact-modal')
 @endsection

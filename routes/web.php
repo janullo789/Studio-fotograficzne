@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PricingController;
 use App\Http\Controllers\RoomController;
@@ -27,6 +28,9 @@ Route::get('/pricing', [PricingController::class, 'index'])->name('pricing');
 Route::get('/room', [RoomController::class, 'index'])->name('room');
 
 Route::get('/voucher', [VoucherController::class, 'index'])->name('voucher');
+
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
 
 
 
