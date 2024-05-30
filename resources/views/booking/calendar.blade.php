@@ -1,8 +1,5 @@
 <div class="container-cal">
     <div class="header-cal">
-        {{--
-                <button class="today-button" onclick="moveToToday()">DZIŚ</button>
-        --}}
         <button class="next-week-button" id="prev-week-button">&lt</button>
         <div class="date-range" id="date-range">27. MAJ - 2. CZE</div>
         <button class="next-week-button" id="next-week-button">&gt;</button>
@@ -22,6 +19,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // ustawianie dni i miesięcy
         var nextWeekButton = document.getElementById('next-week-button');
         var prevWeekButton = document.getElementById('prev-week-button');
         var dateRangeDiv = document.getElementById('date-range');
@@ -82,14 +80,12 @@
         updateDateRange(currentDate);
         updateWeekDays(currentDate);
 
-
+        // ustawianie godzin
         var dayButtons = document.querySelectorAll('.day');
 
         dayButtons.forEach(function(button) {
             button.addEventListener('change', fetchAvailableHours);
         });
-
-
 
         const timeSlotContainer = document.querySelector('.time-slots');
 
@@ -104,6 +100,35 @@
                     });
 
             }
+        }
+
+        function getDate(){
+            var months = {
+                "styczeń": "01",
+                "luty": "02",
+                "marzec": "03",
+                "kwiecień": "04",
+                "maj": "05",
+                "czerwiec": "06",
+                "lipiec": "07",
+                "sierpień": "08",
+                "wrzesień": "09",
+                "październik": "10",
+                "listopad": "11",
+                "grudzień": "12"
+            };
+            var selectedDayButton = document.querySelector('.week-days .day.selected');
+            var day = selectedDayButton ? selectedDayButton.dataset.day : "Brak wybranej daty";
+            var month = document.querySelector('.date-range').textContent
+            var dateSplitted = month.split(" ");
+            if(day > parseInt(dateSplitted[0])){
+                var dateMonth = dateSplitted[1]
+            }else {
+                dateMonth = dateSplitted[4]
+            }
+            var year =  dateSplitted[5]
+            var monthNumber = months[dateMonth.toLowerCase()];
+            return year + "-" + monthNumber + "-" + day;
         }
 
         function updateAvailableHours(hours) {
@@ -129,11 +154,9 @@
                 var selectedRoomText = document.getElementById('selectedRoomText');
                 var selectedTimeText = document.getElementById('selectedTimeText');
                 var selectedDateText = document.getElementById('selectedDateText');
-                var hiddenRoom = document.getElementById('hiddenRoom');
-                var hiddenTime = document.getElementById('hiddenTime');
-                var hiddenDate = document.getElementById('hiddenDate');
 
-                //ustawienie sali
+
+                //ustawienie sali na formularzu
                 var roomSelect = document.getElementById('roomSelect');
 
                 var selectedRoom = roomSelect.options[roomSelect.selectedIndex].text;
@@ -143,11 +166,11 @@
                 }
                 selectedRoomText.textContent = selectedRoom;
 
-                // ustawienie godziny
+                // ustawienie godziny na formularzu
                 var timeSlot = button.parentElement.querySelector('.time').textContent;
                 selectedTimeText.textContent = timeSlot;
 
-                // ustawienie daty
+                // ustawienie daty na formularzu
                 var selectedDayButton = document.querySelector('.week-days .day.selected');
                 var day = selectedDayButton ? selectedDayButton.dataset.day : "Brak wybranej daty";
                 var month = document.querySelector('.date-range').textContent
@@ -160,11 +183,6 @@
                 var year =  dateSplitted[5]
                 var fullDate = day + " " + dateMonth + " " + year;
                 selectedDateText.textContent = fullDate;
-
-
-
-
-
             }
 
             var hourButtons = document.querySelectorAll('.time-slots .reserve-button');
@@ -175,42 +193,17 @@
             });
         }
 
-        function getDate(){
-            var months = {
-                "styczeń": "01",
-                "luty": "02",
-                "marzec": "03",
-                "kwiecień": "04",
-                "maj": "05",
-                "czerwiec": "06",
-                "lipiec": "07",
-                "sierpień": "08",
-                "wrzesień": "09",
-                "październik": "10",
-                "listopad": "11",
-                "grudzień": "12"
-            };
-            var selectedDayButton = document.querySelector('.week-days .day.selected');
-            var day = selectedDayButton ? selectedDayButton.dataset.day : "Brak wybranej daty";
-            console.log(day);
-            var month = document.querySelector('.date-range').textContent
-            var dateSplitted = month.split(" ");
-            if(day > parseInt(dateSplitted[0])){
-                var dateMonth = dateSplitted[1]
-            }else {
-                dateMonth = dateSplitted[4]
-            }
-            var year =  dateSplitted[5]
-            var monthNumber = months[dateMonth.toLowerCase()];
-            var fullFormattedDate = year + "-" + monthNumber + "-" + day;
-           return fullFormattedDate;
-        }
-
         roomSelect.addEventListener('change', fetchAvailableHours);
-        //selectedDayButton.addEventListener('change', fetchAvailableHours);
 
+        //ustawianie stylu na wybranym dniu
+        var dayButtons = document.querySelectorAll('.week-days .day');
 
-
+        dayButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                selectDay(this);
+                fetchAvailableHours();
+            });
+        });
 
         function selectDay(button) {
             var allButtons = document.querySelectorAll('.week-days .day');
@@ -219,17 +212,5 @@
             });
             button.classList.add('selected');
         }
-
-        var dayButtons = document.querySelectorAll('.week-days .day');
-        dayButtons.forEach(function(button) {
-            button.addEventListener('click', function() {
-                selectDay(this);
-                fetchAvailableHours();
-            });
-        });
-
     });
-
-
-
 </script>

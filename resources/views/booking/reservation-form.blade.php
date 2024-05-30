@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="modal-body">
-                <form action="{{ route('reservation.store') }}" method="POST">
+                <form action="{{ route('reservation.store') }}" method="POST" class="reservation-form">
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Imię *</label>
@@ -51,7 +51,12 @@
                     <input type="hidden" id="hiddenRoom" name="room">
                     <input type="hidden" id="hiddenTime" name="hour">
                     <input type="hidden" id="hiddenDate" name="date">
-                    <button class="reserve-bon-todo" id="reserve-button-form">REZERWUJ</button>
+                    <div class="button-container">
+                        <button class="reserve-button-form" id="reserve-button-form">REZERWUJ</button>
+                    </div>
+{{--
+                    <button class="reserve-button-form" id="reserve-button-form">REZERWUJ</button>
+--}}
                 </form>
             </div>
         </div>
@@ -61,15 +66,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var reserveButton = document.getElementById("reserve-button-form");
-        console.log(reserveButton);
-
         reserveButton.addEventListener('click', function() {
-            var roomSelect = document.getElementById('roomSelect');
-            //var reserveButton = document.getElementById('reserve-button');
-            // var reserveButton = document.querySelector('.time-slots .reserve-button.selected-hour');
-           // var reserveButton = document.querySelector('.time-slots .reserve-button.selected-hour');
-
-
             var selectedRoomText = document.getElementById('selectedRoomText');
             var selectedTimeText = document.getElementById('selectedTimeText');
             var selectedDateText = document.getElementById('selectedDateText');
@@ -99,13 +96,7 @@
             var monthNumber = months[dateArray[1].toLowerCase()];
             var day = dateArray[0];
 
-            var fullFormattedDate = year + "-" + monthNumber + "-" + day;
-            console.log(fullFormattedDate)
-            var dateObj = new Date(fullFormattedDate);
-            var formattedDate = dateObj.toISOString().split('T')[0];
-            console.log(formattedDate)
-            hiddenDate.value = formattedDate;
-
+            hiddenDate.value = year + "-" + monthNumber + "-" + day;
         });
     });
 </script>
