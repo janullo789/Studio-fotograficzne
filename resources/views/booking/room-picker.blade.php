@@ -1,7 +1,6 @@
 <div class="container-rp">
     <select class="form-select mb-3" aria-label="Default select example" id="roomSelect">
-        <option selected>Wybierz salę</option>
-        <option value="Sala boho">Sala boho</option>
+        <option selected value="Sala boho">Sala boho</option>
         <option value="Sala barokowa">Sala barokowa</option>
         <option value="Sala nowoczesna">Sala nowoczesna</option>
     </select>

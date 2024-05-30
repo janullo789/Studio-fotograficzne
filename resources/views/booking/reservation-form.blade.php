@@ -51,7 +51,7 @@
                     <input type="hidden" id="hiddenRoom" name="room">
                     <input type="hidden" id="hiddenTime" name="hour">
                     <input type="hidden" id="hiddenDate" name="date">
-                    <button class="reserve-button" id="reserve-button-form">REZERWUJ</button>
+                    <button class="reserve-bon-todo" id="reserve-button-form">REZERWUJ</button>
                 </form>
             </div>
         </div>
@@ -60,69 +60,52 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        var roomSelect = document.getElementById('roomSelect');
-        //var reserveButton = document.getElementById('reserve-button');
-        // var reserveButton = document.querySelector('.time-slots .reserve-button.selected-hour');
-        var reserveButton = document.querySelector('.time-slots .reserve-button.selected-hour');
-
+        var reserveButton = document.getElementById("reserve-button-form");
         console.log(reserveButton);
 
-        var selectedRoomText = document.getElementById('selectedRoomText');
-        var selectedTimeText = document.getElementById('selectedTimeText');
-        var selectedDateText = document.getElementById('selectedDateText');
-        var hiddenRoom = document.getElementById('hiddenRoom');
-        var hiddenTime = document.getElementById('hiddenTime');
-        var hiddenDate = document.getElementById('hiddenDate');
-
-        var months = {
-            "styczeń": "01",
-            "luty": "02",
-            "marzec": "03",
-            "kwiecień": "04",
-            "maj": "05",
-            "czerwiec": "06",
-            "lipiec": "07",
-            "sierpień": "08",
-            "wrzesień": "09",
-            "październik": "10",
-            "listopad": "11",
-            "grudzień": "12"
-        };
-
         reserveButton.addEventListener('click', function() {
-            var selectedRoom = roomSelect.options[roomSelect.selectedIndex].text;
+            var roomSelect = document.getElementById('roomSelect');
+            //var reserveButton = document.getElementById('reserve-button');
+            // var reserveButton = document.querySelector('.time-slots .reserve-button.selected-hour');
+           // var reserveButton = document.querySelector('.time-slots .reserve-button.selected-hour');
 
-            if (selectedRoom === "Wybierz salę") {
-                selectedRoom = "";
-            }
-            selectedRoomText.textContent = selectedRoom;
-            hiddenRoom.value = selectedRoom;
 
-            console.log(this.parent)
-            var timeSlot = this.parent.querySelector('.time').textContent;
-            selectedTimeText.textContent = timeSlot;
-            hiddenTime.value = timeSlot;
+            var selectedRoomText = document.getElementById('selectedRoomText');
+            var selectedTimeText = document.getElementById('selectedTimeText');
+            var selectedDateText = document.getElementById('selectedDateText');
+            var hiddenRoom = document.getElementById('hiddenRoom');
+            var hiddenTime = document.getElementById('hiddenTime');
+            var hiddenDate = document.getElementById('hiddenDate');
 
-            var selectedDayButton = document.querySelector('.week-days .day.selected');
-            var day = selectedDayButton ? selectedDayButton.dataset.day : "Brak wybranej daty";
-            var month = document.querySelector('.date-range').textContent
-            var dateSplitted = month.split(" ");
-            if(day > parseInt(dateSplitted[0])){
-                var dateMonth = dateSplitted[1]
-            }else {
-                dateMonth = dateSplitted[4]
-            }
-            var year =  dateSplitted[5]
-            var fullDate = day + " " + dateMonth + " " + year;
-            selectedDateText.textContent = fullDate;
+            hiddenRoom.value = selectedRoomText.textContent;
+            hiddenTime.value = selectedTimeText.textContent;
 
-            var monthNumber = months[dateMonth.toLowerCase()];
+            var months = {
+                "styczeń": "01",
+                "luty": "02",
+                "marzec": "03",
+                "kwiecień": "04",
+                "maj": "05",
+                "czerwiec": "06",
+                "lipiec": "07",
+                "sierpień": "08",
+                "wrzesień": "09",
+                "październik": "10",
+                "listopad": "11",
+                "grudzień": "12"
+            };
+            var dateArray = selectedDateText.textContent.split(" ");
+            var year = dateArray[2];
+            var monthNumber = months[dateArray[1].toLowerCase()];
+            var day = dateArray[0];
+
             var fullFormattedDate = year + "-" + monthNumber + "-" + day;
             console.log(fullFormattedDate)
             var dateObj = new Date(fullFormattedDate);
             var formattedDate = dateObj.toISOString().split('T')[0];
             console.log(formattedDate)
             hiddenDate.value = formattedDate;
+
         });
     });
 </script>

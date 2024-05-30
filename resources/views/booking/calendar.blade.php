@@ -8,13 +8,13 @@
         <button class="next-week-button" id="next-week-button">&gt;</button>
     </div>
     <div class="week-days">
-            <button class="day selected" data-day="27" onclick="selectDay(this)">Pn<br><span class="day-number">27</span></button>
-            <button class="day" data-day="28" onclick="selectDay(this)">Wt<br><span class="day-number">28</span></button>
-            <button class="day" data-day="29" onclick="selectDay(this)">Śr<br><span class="day-number">29</span></button>
-            <button class="day" data-day="30" onclick="selectDay(this)">Cz<br><span class="day-number">30</span></button>
-            <button class="day" data-day="31" onclick="selectDay(this)">Pt<br><span class="day-number">31</span></button>
-            <button class="day" data-day="1" onclick="selectDay(this)">So<br><span class="day-number">1</span></button>
-            <button class="day" data-day="2" onclick="selectDay(this)">Nd<br><span class="day-number">2</span></button>
+            <button class="day selected" data-day="27">Pn<br><span class="day-number">27</span></button>
+            <button class="day" data-day="28">Wt<br><span class="day-number">28</span></button>
+            <button class="day" data-day="29">Śr<br><span class="day-number">29</span></button>
+            <button class="day" data-day="30">Cz<br><span class="day-number">30</span></button>
+            <button class="day" data-day="31">Pt<br><span class="day-number">31</span></button>
+            <button class="day" data-day="1">So<br><span class="day-number">1</span></button>
+            <button class="day" data-day="2">Nd<br><span class="day-number">2</span></button>
     </div>
     <div class="time-slots"></div>
 </div>
@@ -27,6 +27,8 @@
         var dateRangeDiv = document.getElementById('date-range');
         var currentDate = new Date();
         currentDate.setDate(currentDate.getDate() - (currentDate.getDay() + 6) % 7);
+
+        const roomSelect = document.getElementById('roomSelect');
 
         function updateDateRange(startDate) {
             var endOfWeek = new Date(startDate);
@@ -50,9 +52,11 @@
                 var dayDate = new Date(startDate);
                 dayDate.setDate(startDate.getDate() + i);
                 dayNumberElements[i].textContent = dayDate.getDate();
+                dayNumberElements[i].parentElement.dataset.day = dayDate.getDate();
                 dayNumberElements[i].parentElement.classList.remove('selected');
                 if (dayDate.toDateString() === today.toDateString()) {
                     dayNumberElements[i].parentElement.classList.add('selected');
+                    fetchAvailableHours();
                 }
             }
         }
@@ -63,6 +67,7 @@
             updateDateRange(newDate);
             updateWeekDays(newDate);
             currentDate = newDate;
+            fetchAvailableHours();
         });
 
         prevWeekButton.addEventListener('click', function() {
@@ -71,42 +76,25 @@
             updateDateRange(newDate);
             updateWeekDays(newDate);
             currentDate = newDate;
+            fetchAvailableHours();
         });
 
         updateDateRange(currentDate);
         updateWeekDays(currentDate);
 
-        // function selectHour(button) {
-        //     var allButtons = document.querySelectorAll('.time-slots .reserve-button');
-        //     allButtons.forEach(function(btn) {
-        //         btn.classList.remove('selected-hour');
-        //     });
-        //     button.classList.add('selected-hour');
-        //
-        //     var hiddenRoom = document.getElementById('hiddenRoom');
-        //     var hiddenTime = document.getElementById('hiddenTime');
-        //     var hiddenDate = document.getElementById('hiddenDate');
-        //     hiddenTime.value = "XYZ";
-        // }
-        //
-        // var hourButtons = document.querySelectorAll('.time-slots .reserve-button');
-        // console.log("FFF");
-        // hourButtons.forEach(function(button) {
-        //     button.addEventListener('click', function() {
-        //         selectHour(this);
-        //         console.log("ELo")
-        //     });
-        // });
-    });
 
-    document.addEventListener('DOMContentLoaded', function() {
-        const roomSelect = document.getElementById('roomSelect');
-        const date = getDate()
-        var selectedDayButton = document.querySelector('.day');
+        var dayButtons = document.querySelectorAll('.day');
+
+        dayButtons.forEach(function(button) {
+            button.addEventListener('change', fetchAvailableHours);
+        });
+
+
 
         const timeSlotContainer = document.querySelector('.time-slots');
 
         function fetchAvailableHours() {
+            const date = getDate()
             const room = roomSelect.value;
             if (date && room) {
                 fetch(`/available-slots?date=${date}&room=${room}`)
@@ -145,17 +133,41 @@
                 var hiddenTime = document.getElementById('hiddenTime');
                 var hiddenDate = document.getElementById('hiddenDate');
 
+                //ustawienie sali
+                var roomSelect = document.getElementById('roomSelect');
+
+                var selectedRoom = roomSelect.options[roomSelect.selectedIndex].text;
+
+                if (selectedRoom === "Wybierz salę") {
+                    selectedRoom = "";
+                }
+                selectedRoomText.textContent = selectedRoom;
+
+                // ustawienie godziny
+                var timeSlot = button.parentElement.querySelector('.time').textContent;
+                selectedTimeText.textContent = timeSlot;
+
+                // ustawienie daty
+                var selectedDayButton = document.querySelector('.week-days .day.selected');
+                var day = selectedDayButton ? selectedDayButton.dataset.day : "Brak wybranej daty";
+                var month = document.querySelector('.date-range').textContent
+                var dateSplitted = month.split(" ");
+                if(day > parseInt(dateSplitted[0])){
+                    var dateMonth = dateSplitted[1]
+                }else {
+                    dateMonth = dateSplitted[4]
+                }
+                var year =  dateSplitted[5]
+                var fullDate = day + " " + dateMonth + " " + year;
+                selectedDateText.textContent = fullDate;
 
 
-                console.log(selectedTimeText);
-                selectedTimeText.textContent = "XU";
-                hiddenTime.value = "XYZ";
-                console.log("ELo")
+
+
 
             }
 
             var hourButtons = document.querySelectorAll('.time-slots .reserve-button');
-            console.log("FFF");
             hourButtons.forEach(function(button) {
                 button.addEventListener('click', function() {
                     selectHour(this);
@@ -180,6 +192,7 @@
             };
             var selectedDayButton = document.querySelector('.week-days .day.selected');
             var day = selectedDayButton ? selectedDayButton.dataset.day : "Brak wybranej daty";
+            console.log(day);
             var month = document.querySelector('.date-range').textContent
             var dateSplitted = month.split(" ");
             if(day > parseInt(dateSplitted[0])){
@@ -190,8 +203,7 @@
             var year =  dateSplitted[5]
             var monthNumber = months[dateMonth.toLowerCase()];
             var fullFormattedDate = year + "-" + monthNumber + "-" + day;
-            var dateObj = new Date(fullFormattedDate);
-            return dateObj.toISOString().split('T')[0];
+           return fullFormattedDate;
         }
 
         roomSelect.addEventListener('change', fetchAvailableHours);
@@ -200,21 +212,24 @@
 
 
 
+        function selectDay(button) {
+            var allButtons = document.querySelectorAll('.week-days .day');
+            allButtons.forEach(function(btn) {
+                btn.classList.remove('selected');
+            });
+            button.classList.add('selected');
+        }
+
+        var dayButtons = document.querySelectorAll('.week-days .day');
+        dayButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                selectDay(this);
+                fetchAvailableHours();
+            });
+        });
+
     });
 
-    function selectDay(button) {
-        var allButtons = document.querySelectorAll('.week-days .day');
-        allButtons.forEach(function(btn) {
-            btn.classList.remove('selected');
-        });
-        button.classList.add('selected');
-    }
 
-    var dayButtons = document.querySelectorAll('.week-days .day');
-    dayButtons.forEach(function(button) {
-        button.addEventListener('click', function() {
-            selectDay(this);
-        });
-    });
 
 </script>
