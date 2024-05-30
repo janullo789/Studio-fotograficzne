@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="modal-body">
-                <form action="" method="POST">
+                <form action="{{ route('reservation.store') }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Imię *</label>
@@ -48,7 +48,10 @@
                         <label for="email" class="form-label">Email *</label>
                         <input type="email" class="form-control" id="email" name="email" required>
                     </div>
-                    <button class="reserve-button">REZERWUJ</button>
+                    <input type="hidden" id="hiddenRoom" name="room">
+                    <input type="hidden" id="hiddenTime" name="hour">
+                    <input type="hidden" id="hiddenDate" name="date">
+                    <button class="reserve-button" id="reserve-button-form">REZERWUJ</button>
                 </form>
             </div>
         </div>
@@ -58,10 +61,33 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var roomSelect = document.getElementById('roomSelect');
-        var reserveButton = document.querySelector('.reserve-button');
+        //var reserveButton = document.getElementById('reserve-button');
+        // var reserveButton = document.querySelector('.time-slots .reserve-button.selected-hour');
+        var reserveButton = document.querySelector('.time-slots .reserve-button.selected-hour');
+
+        console.log(reserveButton);
+
         var selectedRoomText = document.getElementById('selectedRoomText');
         var selectedTimeText = document.getElementById('selectedTimeText');
         var selectedDateText = document.getElementById('selectedDateText');
+        var hiddenRoom = document.getElementById('hiddenRoom');
+        var hiddenTime = document.getElementById('hiddenTime');
+        var hiddenDate = document.getElementById('hiddenDate');
+
+        var months = {
+            "styczeń": "01",
+            "luty": "02",
+            "marzec": "03",
+            "kwiecień": "04",
+            "maj": "05",
+            "czerwiec": "06",
+            "lipiec": "07",
+            "sierpień": "08",
+            "wrzesień": "09",
+            "październik": "10",
+            "listopad": "11",
+            "grudzień": "12"
+        };
 
         reserveButton.addEventListener('click', function() {
             var selectedRoom = roomSelect.options[roomSelect.selectedIndex].text;
@@ -70,22 +96,33 @@
                 selectedRoom = "";
             }
             selectedRoomText.textContent = selectedRoom;
+            hiddenRoom.value = selectedRoom;
 
-            var timeSlot = this.parentElement.querySelector('.time').textContent;
+            console.log(this.parent)
+            var timeSlot = this.parent.querySelector('.time').textContent;
             selectedTimeText.textContent = timeSlot;
+            hiddenTime.value = timeSlot;
 
             var selectedDayButton = document.querySelector('.week-days .day.selected');
             var day = selectedDayButton ? selectedDayButton.dataset.day : "Brak wybranej daty";
-
             var month = document.querySelector('.date-range').textContent
-            var date_splitted = month.split(" ");
-            if(day > parseInt(date_splitted[0])){
-                var dateMonth = date_splitted[1]
-            }else{
-                dateMonth = date_splitted[4]
+            var dateSplitted = month.split(" ");
+            if(day > parseInt(dateSplitted[0])){
+                var dateMonth = dateSplitted[1]
+            }else {
+                dateMonth = dateSplitted[4]
             }
-            selectedDateText.textContent = day + " " + dateMonth;
+            var year =  dateSplitted[5]
+            var fullDate = day + " " + dateMonth + " " + year;
+            selectedDateText.textContent = fullDate;
 
+            var monthNumber = months[dateMonth.toLowerCase()];
+            var fullFormattedDate = year + "-" + monthNumber + "-" + day;
+            console.log(fullFormattedDate)
+            var dateObj = new Date(fullFormattedDate);
+            var formattedDate = dateObj.toISOString().split('T')[0];
+            console.log(formattedDate)
+            hiddenDate.value = formattedDate;
         });
     });
 </script>

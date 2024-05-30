@@ -16,36 +16,7 @@
             <button class="day" data-day="1" onclick="selectDay(this)">So<br><span class="day-number">1</span></button>
             <button class="day" data-day="2" onclick="selectDay(this)">Nd<br><span class="day-number">2</span></button>
     </div>
-    <div class="time-slots">
-        <div class="time-slot">
-            <span class="time">08:00 - 09:00</span>
-            <button type="button" class="reserve-button"  data-bs-toggle="modal" data-bs-target="#reservationForm">REZERWUJ</button>
-        </div>
-        <div class="time-slot">
-            <span class="time">09:00 - 10:00</span>
-            <button class="reserve-button">REZERWUJ</button>
-        </div>
-        <div class="time-slot">
-            <span class="time">10:00 - 11:00</span>
-            <button class="reserve-button">REZERWUJ</button>
-        </div>
-        <div class="time-slot">
-            <span class="time">11:00 - 12:00</span>
-            <button class="reserve-button">REZERWUJ</button>
-        </div>
-        <div class="time-slot">
-            <span class="time">12:00 - 13:00</span>
-            <button class="reserve-button">REZERWUJ</button>
-        </div>
-        <div class="time-slot">
-            <span class="time">13:00 - 14:00</span>
-            <button class="reserve-button">REZERWUJ</button>
-        </div>
-        <div class="time-slot">
-            <span class="time">14:00 - 15:00</span>
-            <button class="reserve-button">REZERWUJ</button>
-        </div>
-    </div>
+    <div class="time-slots"></div>
 </div>
 
 
@@ -62,7 +33,8 @@
             endOfWeek.setDate(startDate.getDate() + 6);
             var formattedStartDate = formatDate(startDate);
             var formattedEndDate = formatDate(endOfWeek);
-            dateRangeDiv.textContent = formattedStartDate + ' - ' + formattedEndDate;
+            var year = endOfWeek.getFullYear();
+            dateRangeDiv.textContent = formattedStartDate + ' - ' + formattedEndDate + ' ' + year;
         }
 
         function formatDate(date) {
@@ -103,6 +75,131 @@
 
         updateDateRange(currentDate);
         updateWeekDays(currentDate);
+
+        // function selectHour(button) {
+        //     var allButtons = document.querySelectorAll('.time-slots .reserve-button');
+        //     allButtons.forEach(function(btn) {
+        //         btn.classList.remove('selected-hour');
+        //     });
+        //     button.classList.add('selected-hour');
+        //
+        //     var hiddenRoom = document.getElementById('hiddenRoom');
+        //     var hiddenTime = document.getElementById('hiddenTime');
+        //     var hiddenDate = document.getElementById('hiddenDate');
+        //     hiddenTime.value = "XYZ";
+        // }
+        //
+        // var hourButtons = document.querySelectorAll('.time-slots .reserve-button');
+        // console.log("FFF");
+        // hourButtons.forEach(function(button) {
+        //     button.addEventListener('click', function() {
+        //         selectHour(this);
+        //         console.log("ELo")
+        //     });
+        // });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const roomSelect = document.getElementById('roomSelect');
+        const date = getDate()
+        var selectedDayButton = document.querySelector('.day');
+
+        const timeSlotContainer = document.querySelector('.time-slots');
+
+        function fetchAvailableHours() {
+            const room = roomSelect.value;
+            if (date && room) {
+                fetch(`/available-slots?date=${date}&room=${room}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        updateAvailableHours(data);
+                    });
+
+            }
+        }
+
+        function updateAvailableHours(hours) {
+            timeSlotContainer.innerHTML = '';
+            console.log(hours)
+            hours.forEach(hour => {
+                const timeSlotDiv = document.createElement('div');
+                timeSlotDiv.classList.add('time-slot');
+                timeSlotDiv.innerHTML = `
+                <span class="time">${hour}</span>
+                <button type="button" class="reserve-button" data-bs-toggle="modal" data-bs-target="#reservationForm">REZERWUJ</button>
+            `;
+                timeSlotContainer.appendChild(timeSlotDiv);
+            });
+
+            function selectHour(button) {
+                var allButtons = document.querySelectorAll('.time-slots .reserve-button');
+                allButtons.forEach(function(btn) {
+                    btn.classList.remove('selected-hour');
+                });
+                button.classList.add('selected-hour');
+
+                var selectedRoomText = document.getElementById('selectedRoomText');
+                var selectedTimeText = document.getElementById('selectedTimeText');
+                var selectedDateText = document.getElementById('selectedDateText');
+                var hiddenRoom = document.getElementById('hiddenRoom');
+                var hiddenTime = document.getElementById('hiddenTime');
+                var hiddenDate = document.getElementById('hiddenDate');
+
+
+
+                console.log(selectedTimeText);
+                selectedTimeText.textContent = "XU";
+                hiddenTime.value = "XYZ";
+                console.log("ELo")
+
+            }
+
+            var hourButtons = document.querySelectorAll('.time-slots .reserve-button');
+            console.log("FFF");
+            hourButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    selectHour(this);
+                });
+            });
+        }
+
+        function getDate(){
+            var months = {
+                "styczeń": "01",
+                "luty": "02",
+                "marzec": "03",
+                "kwiecień": "04",
+                "maj": "05",
+                "czerwiec": "06",
+                "lipiec": "07",
+                "sierpień": "08",
+                "wrzesień": "09",
+                "październik": "10",
+                "listopad": "11",
+                "grudzień": "12"
+            };
+            var selectedDayButton = document.querySelector('.week-days .day.selected');
+            var day = selectedDayButton ? selectedDayButton.dataset.day : "Brak wybranej daty";
+            var month = document.querySelector('.date-range').textContent
+            var dateSplitted = month.split(" ");
+            if(day > parseInt(dateSplitted[0])){
+                var dateMonth = dateSplitted[1]
+            }else {
+                dateMonth = dateSplitted[4]
+            }
+            var year =  dateSplitted[5]
+            var monthNumber = months[dateMonth.toLowerCase()];
+            var fullFormattedDate = year + "-" + monthNumber + "-" + day;
+            var dateObj = new Date(fullFormattedDate);
+            return dateObj.toISOString().split('T')[0];
+        }
+
+        roomSelect.addEventListener('change', fetchAvailableHours);
+        //selectedDayButton.addEventListener('change', fetchAvailableHours);
+
+
+
+
     });
 
     function selectDay(button) {
@@ -119,4 +216,5 @@
             selectDay(this);
         });
     });
+
 </script>
