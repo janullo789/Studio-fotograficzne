@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Mail\ReservationConfirmation;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -9,12 +10,15 @@ use Illuminate\Support\Facades\Mail;
 class ReservationController extends Controller{
     public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
-       /* $request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
+            'surname' => 'required|string|max:255',
             'phone' => 'nullable|string|max:255',
             'email' => 'required|email|max:255',
-            'question' => 'required|string',
-        ]);*/
+            'date' => 'required|date',
+            'room' => 'required|string|max:255',
+            'hour' => 'required|string|max:255',
+        ]);
 
         $reservation = Reservation::create([
             'name' => $request->name,
@@ -26,7 +30,7 @@ class ReservationController extends Controller{
             'hour' => $request->hour
         ]);
 
-        //Mail::to($request->email)->send(new ReservationConfirmation($message));
+        Mail::to($request->email)->send(new ReservationConfirmation($reservation));
 
         return redirect()->back()->with('success', 'Twoja rezerwacja została zapisana!');
     }

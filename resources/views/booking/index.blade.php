@@ -3,7 +3,7 @@
 @section('title', 'FotoStudio - Rezerwacje')
 
 @section('content')
-    <div class="container mt-5">
+    <div class="container my-5">
         <div class="row">
             <div class="col-md-3">
                 <div class="box-shadow">
