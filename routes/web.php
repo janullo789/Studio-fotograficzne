@@ -7,6 +7,7 @@ use App\Http\Controllers\PricingController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\AdminController;
+use \App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,10 +33,15 @@ Route::get('/voucher', [VoucherController::class, 'index'])->name('voucher');
 
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
+Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store');
+Route::get('/available-slots', [ReservationController::class, 'availableSlots']);
+
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin/messages', [AdminController::class, 'index'])->name('admin.messages');
     Route::delete('/admin/messages/{id}', [AdminController::class, 'destroy'])->name('admin.messages.destroy');
     Route::post('/admin/messages/{id}/respond', [AdminController::class, 'respond'])->name('admin.messages.respond');
+    Route::get('/admin/reservations', [AdminController::class, 'reservations'])->name('admin.reservations');
+    Route::delete('/admin/reservations/{id}', [AdminController::class, 'cancelReservation'])->name('admin.reservations.cancel');
 });
 
 

@@ -163,3 +163,140 @@ form button.send-button:hover {
     transform: translate(-50%, -50%);
     text-align: center;
 }
+.reservation-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+/*CALENDAR*/
+.container-cal {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 800px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+
+}
+
+.header-cal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.today-button,
+.next-week-button {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.date-range {
+    font-weight: bold;
+}
+
+.week-days {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.day {
+    text-align: center;
+    background: none;
+    border: none;
+}
+
+.selected {
+    background-color: #808276;
+    color: white;
+    border-radius: 10%;
+    padding: 5px;
+}
+
+.day-number {
+    display: block;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.time-slots {
+    padding: 10px;
+}
+
+.time-slot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.time {
+    font-size: 16px;
+}
+
+.reserve-button {
+    background-color: #CCC7B9;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.reserve-button:hover {
+    background-color: #808276;
+}
+.reserve-button-form{
+    background-color: #CCC7B9;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.reserve-button-form:hover {
+    background-color: #808276;
+}
+.box-shadow {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.icon-text {
+    display: flex;
+    margin-bottom: 0.5rem; /* Adjusts the space between the icon and the text */
+
+}
+.icon-text svg {
+    margin-right: 0.5rem; /* Adjusts the space between the icon and the text */
+    width: 24px; /* Set a fixed width for the icons */
+    height: 24px; /* Set a fixed height for the icons */
+}
+.container-rp{
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.reservation-form-header {
+    font-family: 'Quicksand', sans-serif;
+    font-size: smaller;
+    margin: 0;
+    white-space: nowrap;
+}
+.icon {
+    width: 24px;
+    height: 24px;
+}
