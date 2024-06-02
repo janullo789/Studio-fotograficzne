@@ -23,7 +23,7 @@ class AdminController extends Controller
         $message = Message::findOrFail($id);
         $message->delete();
 
-        return redirect()->route('admin.messages', ['admin_token' => $request->query('admin_token')])->with('success', 'Message deleted successfully.');
+        return redirect()->route('admin.messages', ['admin_token' => $request->query('admin_token')])->with('success', 'Wiadomość została usunięta pomyślnie!');
     }
 
     public function respond(Request $request, $id)
@@ -38,7 +38,7 @@ class AdminController extends Controller
         $message->responded = true;
         $message->save();
 
-        return redirect()->route('admin.messages', ['admin_token' => $request->query('admin_token')])->with('success', 'Response sent successfully.');
+        return redirect()->route('admin.messages', ['admin_token' => $request->query('admin_token')])->with('success', 'Odpowiedź została wysłana pomyślnie!');
     }
 
     public function reservations(Request $request)
@@ -70,6 +70,6 @@ class AdminController extends Controller
         $reservation = Reservation::findOrFail($id);
         $reservation->delete();
 
-        return redirect()->route('admin.reservations', ['admin_token' => $request->query('admin_token')])->with('success', 'Reservation canceled successfully.');
+        return redirect()->route('admin.reservations', ['admin_token' => $request->query('admin_token')])->with('success', 'Rezerwacja została anulowana pomyślnie!.');
     }
 }
