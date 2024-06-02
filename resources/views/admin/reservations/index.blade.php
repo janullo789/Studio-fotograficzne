@@ -72,7 +72,7 @@
                             <form action="{{ route('admin.reservations.cancel', ['id' => $reservation->id, 'admin_token' => $admin_token]) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
+                                <button type="submit" class="btn btn-danger btn-sm">Usuń</button>
                             </form>
                         </td>
                     </tr>

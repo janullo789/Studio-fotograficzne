@@ -3,6 +3,7 @@
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PricingController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\VoucherController;
@@ -22,6 +23,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('/newsletter', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
+
 
 Route::get('/booking', [BookingController::class, 'index'])->name('booking');
 
