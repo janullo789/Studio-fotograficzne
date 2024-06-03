@@ -28,17 +28,17 @@
                     Opis: Podaruj naturalne i autentyczne zdjęcia w stylu lifestyle, idealne dla rodzin, par oraz indywidualnych projektów. Voucher obejmuje 2 godziny sesji oraz 20 wyretuszowanych zdjęć.
                 </p>
             </div>
-            <div  class="col-md-5 p-lg-8 my-3 d-flex flex-wrap">
-                <div class="col-5 p-1">
-                    <img src="{{ Vite::asset('resources/pictures/airplane.jpg') }}" alt="Avatar" class="img-fluid my-2">
+            <div  class="col-md-3 p-lg-8 mx-auto d-flex flex-wrap">
+                <div class="p-1">
+                    <img src="{{ Vite::asset('resources/pictures/male.jpg') }}" alt="Avatar" class="img-fluid my-2">
                 </div>
-                <div class="col-5 p-1">
-                    <img src="{{ Vite::asset('resources/pictures/horse.jpg') }}" alt="Avatar" class="img-fluid my-2">
+                <div class=" p-1">
+                    <img src="{{ Vite::asset('resources/pictures/wedding.jpg') }}" alt="Avatar" class="img-fluid my-2">
                 </div>
-                <div class="col-5 p-1">
-                    <img src="{{ Vite::asset('resources/pictures/hourglass.jpg') }}" alt="Avatar" class="img-fluid my-2">
+                <div class="p-1">
+                    <img src="{{ Vite::asset('resources/pictures/camera.jpg') }}" alt="Avatar" class="img-fluid my-2">
                 </div>
-                <div class="col-5 p-1">
+                <div class=" p-1">
                     <img src="{{ Vite::asset('resources/pictures/three_friends.jpg') }}" alt="Avatar" class="img-fluid my-2">
                 </div>
             </div>
