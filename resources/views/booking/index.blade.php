@@ -3,6 +3,7 @@
 @section('title', 'FotoStudio - Rezerwacje')
 
 @section('content')
+    <h1 class="fw-normal my-3 room-header text-center">Kalendarz rezerwacji</h1>
     <div class="container my-5">
         <div class="row">
             <div class="col-md-3">

@@ -10,7 +10,7 @@
     <div class="position-relative overflow-hidden p-4 p-md-1 m-md-3 text-center">
         <div class="col-md-5 p-lg-5 mx-auto my-2">
             <h1 class="display-8 fw-normal text-background">Przeżyj z nami niezapomnianą sesję</h1>
-            <a class="btn btn-outline-secondary" href="#">Dowiedz się więcej</a>
+            <a class="reserve-button text-decoration-none get-more-button" href="#services">Dowiedz się więcej</a>
         </div>
     </div>
     @include('home.about')

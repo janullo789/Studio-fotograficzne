@@ -122,6 +122,60 @@ form button.send-button:hover {
     height: auto;
 }
 
+.get-more-button:hover{
+    color: #dbe0c9;
+}
+/*ABOUT*/
+.about{
+    background-color: #808276;
+    color: #fffef9;
+}
+.about-text{
+    color: #CCC7B9;
+    font-size: 28px;
+}
+.portrait {
+    width: 70%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 3/4;
+    display: block;
+}
+
+.portrait-container {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.portrait-overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 71%;
+    height: 100%;
+    background: #CCC7B9;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.portrait-container:hover .portrait-overlay{
+    opacity: 0.6;
+    transition: .5s ease;
+}
+.photo-container{
+    margin-left: 120px;
+}
+.services{
+    margin-top: 100px;
+    background-color: #808276;
+    color: #fffef9;
+}
+
 .container-gallery .row > [class*='col-'] {
     padding:10px; /* Adjust the padding to reduce the gaps */
 }
@@ -129,12 +183,17 @@ form button.send-button:hover {
 .room-container {
     position: relative;
     width: 100%;
+    padding-top: 65%; /* Stosunek wysokości do szerokości 4:3 */
+    overflow: hidden;
 }
 
 .room-image {
-    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
 }
 
 .room-overlay {
