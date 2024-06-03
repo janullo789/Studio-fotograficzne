@@ -34,16 +34,16 @@
             </div>
             <div  class="col-md-5 p-lg-8 my-3 d-flex flex-wrap">
                 <div class="col-5 p-1">
-                    <img src="{{ Vite::asset('resources/pictures/studio.jpg') }}" alt="Avatar" class="img-fluid my-2">
+                    <img src="{{ Vite::asset('resources/pictures/airplane.jpg') }}" alt="Avatar" class="img-fluid my-2">
                 </div>
                 <div class="col-5 p-1">
-                    <img src="{{ Vite::asset('resources/pictures/studio.jpg') }}" alt="Avatar" class="img-fluid my-2">
+                    <img src="{{ Vite::asset('resources/pictures/horse.jpg') }}" alt="Avatar" class="img-fluid my-2">
                 </div>
                 <div class="col-5 p-1">
-                    <img src="{{ Vite::asset('resources/pictures/studio.jpg') }}" alt="Avatar" class="img-fluid my-2">
+                    <img src="{{ Vite::asset('resources/pictures/hourglass.jpg') }}" alt="Avatar" class="img-fluid my-2">
                 </div>
                 <div class="col-5 p-1">
-                    <img src="{{ Vite::asset('resources/pictures/studio.jpg') }}" alt="Avatar" class="img-fluid my-2">
+                    <img src="{{ Vite::asset('resources/pictures/three_friends.jpg') }}" alt="Avatar" class="img-fluid my-2">
                 </div>
             </div>
         </div>
