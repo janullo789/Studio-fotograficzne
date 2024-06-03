@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Admin - Reservations')
+@section('title', 'Admin - Rezerwacje')
 
 @section('content')
     <style>
@@ -13,7 +13,7 @@
         }
     </style>
     <div class="container my-5">
-        <h1>Reservations</h1>
+        <h1>Rezerwacje</h1>
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
@@ -22,15 +22,15 @@
             <input type="hidden" name="admin_token" value="{{ $admin_token }}">
             <div class="row mb-3">
                 <div class="col-md-3">
-                    <label for="start_date" class="form-label">Start Date</label>
+                    <label for="start_date" class="form-label">Data Początkowa</label>
                     <input type="date" class="form-control" id="start_date" name="start_date" value="{{ request('start_date') }}">
                 </div>
                 <div class="col-md-3">
-                    <label for="end_date" class="form-label">End Date</label>
+                    <label for="end_date" class="form-label">Data Końcowa</label>
                     <input type="date" class="form-control" id="end_date" name="end_date" value="{{ request('end_date') }}">
                 </div>
                 <div class="col-md-3 align-self-end">
-                    <button type="submit" class="btn btn-primary">Filter</button>
+                    <button type="submit" class="btn btn-primary">Filtruj</button>
                 </div>
             </div>
         </form>
@@ -41,14 +41,14 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Surname</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Date</th>
-                    <th>Room</th>
-                    <th>Hour</th>
-                    <th>Actions</th>
+                    <th>Imię</th>
+                    <th>Nazwisko</th>
+                    <th>Telefon</th>
+                    <th>E-mail</th>
+                    <th>Data</th>
+                    <th>Sala</th>
+                    <th>Godzina</th>
+                    <th>Akcje</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -72,7 +72,7 @@
                             <form action="{{ route('admin.reservations.cancel', ['id' => $reservation->id, 'admin_token' => $admin_token]) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
+                                <button type="submit" class="btn btn-danger btn-sm">Usuń</button>
                             </form>
                         </td>
                     </tr>
