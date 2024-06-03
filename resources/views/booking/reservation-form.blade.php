@@ -54,9 +54,6 @@
                     <div class="button-container">
                         <button class="reserve-button-form" id="reserve-button-form">REZERWUJ</button>
                     </div>
-{{--
-                    <button class="reserve-button-form" id="reserve-button-form">REZERWUJ</button>
---}}
                 </form>
             </div>
         </div>
