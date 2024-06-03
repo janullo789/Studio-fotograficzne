@@ -3,14 +3,10 @@
 @section('title', 'FotoStudio - Voucher')
 
 @section('content')
-    <div class="position-relative overflow-hidden p-md-3 m-md-3">
-        <div class="col-md-8 p-lg-7 mx-auto my-4 text-center">
-            <p class="fw-normal"> Studio fotograficzne “<strong>FotoStudio</strong>” w Krakowie to przestrzeń stworzona z myślą o najwyższej jakości sesjach zdjęciowych, znajdująca się w zabytkowej kamienicy w sercu malowniczego Podgórza. Nasze studio oferuje łącznie 190 m² powierzchni z wysokimi sufitami o wysokości 4,15 m, zapewniając przestrzeń idealną do realizacji najbardziej wymagających projektów fotograficznych.
-            <hr>Nasza oferta obejmuje różnorodne vouchery na usługi fotograficzne, które mogą być idealnym prezentem na każdą okazję. </p>
-        </div>
-        <h1 class="fw-normal my-5 room-header text-center">Vouchery</h1>
+    <div class="position-relative overflow-hidden p-md-3 m-md-3 align-items-center">
+        <h1 class="fw-normal my-3 room-header text-center">Vouchery</h1>
         <div class="row">
-            <div class="col-md-5 align-items-center p-lg-8 mx-auto my-4 d-flex flex-wrap">
+            <div class="col-md-5 align-items-center p-lg-8 mx-auto d-flex flex-wrap">
                 <p class="fw-normal">
                     <strong>Voucher na sesję portretową</strong><br>
                     Cena: 300 zł<br>

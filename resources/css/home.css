@@ -19,6 +19,7 @@
 .site-header a:hover {
     color: #252323;
     text-decoration: none;
+    transition: .5s ease;
 }
 
 /*
@@ -91,17 +92,20 @@
     z-index: -1;
 }
 .text-background {
-    font-size: 48px;
+    font-size: 50px;
     display: inline-block;
-    font-family: 'Quicksand', sans-serif; /* Ustaw QuickSand jako czcionkę */
+    font-family: 'Quicksand', sans-serif;
     border-radius: 10px;
     padding-bottom: 20px;
 }
 
 .room-header{
-    font-size: 48px;
-    font-family: 'Quicksand', sans-serif; /* Ustaw QuickSand jako czcionkę */
+    font-size: 45px;
+    font-family: 'Quicksand', sans-serif;
     color: #808276
+}
+.room-intro{
+    font-family: 'Open Sans';
 }
 .service-item {
     width: 30%;
@@ -122,19 +126,104 @@ form button.send-button:hover {
     height: auto;
 }
 
-.container-gallery .row > [class*='col-'] {
-    padding:10px; /* Adjust the padding to reduce the gaps */
+.get-more-button:hover{
+    color: #dbe0c9;
+
+}
+
+/* Stylizacja kontenera galerii */
+  .custom-img {
+      transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+.custom-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.container-gallery {
+    margin-top: 30px;
+}
+
+.position-relative {
+    padding-top: 3rem;
+}
+
+
+.display-8 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+}
+
+
+/*ABOUT*/
+.about{
+    background-color: #808276;
+    color: #fffef9;
+}
+.about-text{
+    font-size: 28px;
+    font-family: 'Quicksand', sans-serif;
+}
+.studio-name-exposition{
+    color: #808276;
+}
+.portrait {
+    width: 70%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 3/4;
+    display: block;
+}
+
+.portrait-container {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.portrait-overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 71%;
+    height: 100%;
+    background: #CCC7B9;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.portrait-container:hover .portrait-overlay{
+    opacity: 0.6;
+    transition: .5s ease;
+}
+.photo-container{
+    margin-left: 120px;
+}
+.services{
+    margin-top: 100px;
+    background-color: #808276;
+    color: #fffef9;
 }
 
 .room-container {
     position: relative;
     width: 100%;
+    padding-top: 65%; /* Stosunek wysokości do szerokości 4:3 */
+    overflow: hidden;
 }
 
 .room-image {
-    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
 }
 
 .room-overlay {
@@ -152,16 +241,18 @@ form button.send-button:hover {
 
 .room-container:hover .room-overlay {
     opacity: 0.9;
+    transition: .5s ease;
 }
 
 .room-text {
     color: BLACK;
-    font-size: 20px;
+    font-size: 23px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+    font-family: "Quicksand";
 }
 .reservation-form {
     display: flex;
@@ -173,6 +264,67 @@ form button.send-button:hover {
     display: flex;
     justify-content: center;
     width: 100%;
+}
+/**/
+
+h1.display-8 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.text-background {
+    background: linear-gradient(to right, #808276, #CCC7B9); /* Gradientowy tekst */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+
+.form-group label {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ced4da;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #ff6f61;
+    outline: none;
+}
+
+.btn.send-button {
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.img-fluid-contact {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+        filter: grayscale(100%);
+    width: 70%;
+}
+.services-text-background{
+    background: linear-gradient(to right, #dbe0c9, #fffef9); /* Gradientowy tekst */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.person-intro{
+    font-family: "Dancing script";
 }
 /*CALENDAR*/
 .container-cal {
@@ -258,6 +410,7 @@ form button.send-button:hover {
 
 .reserve-button:hover {
     background-color: #808276;
+    transition: .5s ease;
 }
 .reserve-button-form{
     background-color: #CCC7B9;
@@ -269,6 +422,7 @@ form button.send-button:hover {
 }
 .reserve-button-form:hover {
     background-color: #808276;
+    transition: .5s ease;
 }
 .box-shadow {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
